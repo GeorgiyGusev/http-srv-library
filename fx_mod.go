@@ -1,8 +1,8 @@
-package pkg
+package http_support_library
 
 import (
-	"github.com/neiasit/http-support-library/internal/http"
-	"github.com/neiasit/http-support-library/internal/http_gateway"
+	"github.com/neiasit/http-support-library/http"
+	"github.com/neiasit/http-support-library/http_gateway"
 	"go.uber.org/fx"
 )
 

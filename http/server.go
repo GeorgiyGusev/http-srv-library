@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/fx"
 	"log/slog"
