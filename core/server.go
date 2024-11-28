@@ -3,10 +3,10 @@ package core
 import (
 	"context"
 	"errors"
+	authLib "github.com/GeorgiyGusev/auth-library/provider"
 	"github.com/GeorgiyGusev/http-srv-library/middlewares"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	authLib "github.com/neiasit/auth-library/provider"
 	"go.uber.org/fx"
 	"log/slog"
 	"net"
