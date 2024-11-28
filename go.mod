@@ -7,7 +7,7 @@ toolchain go1.23.3
 require (
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/labstack/echo/v4 v4.12.0
-	github.com/neiasit/auth-library v1.0.3
+	github.com/GeorgiyGusev/auth-library v1.0.2
 	go.uber.org/fx v1.23.0
 )
 

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
+	authLib "github.com/GeorgiyGusev/auth-library/provider"
 	"github.com/labstack/echo/v4"
-	authLib "github.com/neiasit/auth-library/provider"
 	"log/slog"
 )
 
@@ -14,6 +14,11 @@ func NewAuthMiddleware(provider authLib.AuthProvider, logger *slog.Logger) echo.
 		return func(c echo.Context) error {
 
 			path := c.Path()
+
+			if !provider.IsEndpointSecure(path) {
+				return next(c)
+			}
+
 			// Extract the authorization header
 			authHeader := c.Request().Header.Get("Authorization")
 			if authHeader == "" {
