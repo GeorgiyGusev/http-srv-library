@@ -1,29 +1,15 @@
-package http_support_library
+package http_srv_library
 
 import (
-	"github.com/neiasit/http-support-library/http"
-	"github.com/neiasit/http-support-library/http_gateway"
+	"github.com/GeorgiyGusev/http-srv-library/http"
 	"go.uber.org/fx"
 )
 
-var HttpServerModule = fx.Module(
+var Module = fx.Module(
 	"http_server",
 	fx.Provide(
 		http.LoadConfig,
 		http.NewHttpServer,
 	),
 	fx.Invoke(http.RunHttpServer),
-)
-
-var GrpcGatewayModule = fx.Module(
-	"grpc_gateway",
-	fx.Provide(
-		http_gateway.NewGatewayServer,
-	),
-)
-
-var Module = fx.Module(
-	"http support",
-	GrpcGatewayModule,
-	HttpServerModule,
 )

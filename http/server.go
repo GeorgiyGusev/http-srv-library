@@ -3,7 +3,6 @@ package http
 import (
 	"context"
 	"errors"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/fx"
@@ -15,7 +14,8 @@ import (
 
 var httpServerTag = slog.String("server", "http_server")
 
-func NewHttpServer(logger *slog.Logger, gateway *runtime.ServeMux) *echo.Echo {
+func NewHttpServer(logger *slog.Logger, cfg *Config) *echo.Echo {
+	// Http srv setup
 	e := echo.New()
 	e.HideBanner = true
 	e.HidePort = true
@@ -52,10 +52,11 @@ func NewHttpServer(logger *slog.Logger, gateway *runtime.ServeMux) *echo.Echo {
 			return nil
 		},
 	}))
-	if gateway == nil {
-		return e
-	}
-	e.Any("/*", echo.WrapHandler(gateway))
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: cfg.AllowedOrigins,
+		AllowHeaders: cfg.AllowedHeaders,
+		AllowMethods: cfg.AllowedMethods,
+	}))
 	return e
 }
 

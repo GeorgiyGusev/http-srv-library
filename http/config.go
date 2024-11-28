@@ -7,8 +7,11 @@ import (
 )
 
 type Config struct {
-	Host string `json:"host" env-default:"0.0.0.0" env:"HOST"`
-	Port int    `json:"port" env-default:"8080" env:"PORT"`
+	Host           string   `json:"host" env-default:"0.0.0.0" env:"HOST"`
+	Port           int      `json:"port" env-default:"8080" env:"PORT"`
+	AllowedOrigins []string `json:"allowed_origins" env:"ALLOWED_ORIGINS" default:"*"`
+	AllowedHeaders []string `json:"allowed_headers" env:"ALLOWED_HEADERS" default:"*"`
+	AllowedMethods []string `json:"allowed_methods" env:"ALLOWED_METHODS" default:"GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD"`
 }
 
 func (cfg *Config) Address() string {
