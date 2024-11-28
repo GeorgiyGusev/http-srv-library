@@ -1,15 +1,23 @@
 package http_srv_library
 
 import (
-	"github.com/GeorgiyGusev/http-srv-library/http"
+	"github.com/GeorgiyGusev/http-srv-library/core"
 	"go.uber.org/fx"
 )
 
 var Module = fx.Module(
 	"http_server",
 	fx.Provide(
-		http.LoadConfig,
-		http.NewHttpServer,
+		core.LoadConfig,
+		core.NewHttpServer,
 	),
-	fx.Invoke(http.RunHttpServer),
+	fx.Invoke(core.RunHttpServer),
+)
+var ModuleWithAuth = fx.Module(
+	"http_server",
+	fx.Provide(
+		core.LoadConfig,
+		core.NewHttpServerWithAuth,
+	),
+	fx.Invoke(core.RunHttpServer),
 )

@@ -1,4 +1,4 @@
-package http
+package core
 
 import (
 	"github.com/ilyakaznacheev/cleanenv"
@@ -20,7 +20,7 @@ func (cfg *Config) Address() string {
 
 func LoadConfig() (*Config, error) {
 	var cfg struct {
-		Config Config `json:"http" env-prefix:"HTTP_"`
+		Config Config `json:"core" env-prefix:"HTTP_"`
 	}
 	err := cleanenv.ReadConfig("config.json", &cfg)
 	if err != nil {
