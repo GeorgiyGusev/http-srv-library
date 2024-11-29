@@ -15,13 +15,12 @@ func NewAuthMiddleware(provider authLib.AuthProvider, logger *slog.Logger) echo.
 
 			path := c.Path()
 
-			if !provider.IsEndpointSecure(path) {
-				return next(c)
-			}
-
 			// Extract the authorization header
 			authHeader := c.Request().Header.Get("Authorization")
 			if authHeader == "" {
+				if !provider.IsEndpointSecure(path) {
+					return next(c)
+				}
 				logger.Error("Missing authorization token")
 				return echo.NewHTTPError(http.StatusUnauthorized, echo.Map{"message": "missing authorization token"})
 			}
